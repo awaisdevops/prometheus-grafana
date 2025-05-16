@@ -74,36 +74,37 @@ This section details creating an Alertmanager configuration in Kubernetes using 
 ### `alertmanager-configurations.yaml`
 
 ```yaml
-apiVersion: monitoring.coreos.com/v1alpha1 
-kind: AlertmanagerConfig
+apiVersion: monitoring.coreos.com/v1alpha1  # API version for the AlertmanagerConfig CRD
+kind: AlertmanagerConfig                     # Kind of the Kubernetes resource
 metadata:
-  name: main-rules-alert-config
-  namespace: monitoring
+  name: main-rules-alert-config             # Name of the AlertmanagerConfig object
+  namespace: monitoring                     # Namespace where the config applies (usually where Alertmanager is running)
 spec:
-  route:
-    receiver: 'email'
-    repeatInterval: 30m
-    routes:
+  route:                                    # Top-level routing configuration
+    receiver: 'email'                       # Default receiver if no child route matches
+    repeatInterval: 30m                     # Time to wait before sending a repeated notification
+    routes:                                 # Child routes for specific alerts
+      - matchers:                           # Match alerts with specific labels
+          - name: alertname
+            value: HostHighCPULoad          # Matches alerts with alertname: HostHighCPULoad
       - matchers:
           - name: alertname
-            value: HostHighCPULoad
-      - matchers:
-          - name: alertname
-            value: KubernetesPodCrashLooping
-        receiver: 'email'
-        repeatInterval: 15m
+            value: KubernetesPodCrashLooping  # Matches alerts with alertname: KubernetesPodCrashLooping
+        receiver: 'email'                   # Receiver for this route
+        repeatInterval: 15m                 # Repeat interval for this specific alert
 
-  receivers:
-    - name: 'email'
+  receivers:                                # List of configured notification receivers
+    - name: 'email'                         # Receiver name to be used in routes
       emailConfigs:
-        - to: 'awais.akram@gmail.com'
-          from: 'awais.akram@gmail.com'
-          smarthost: 'smtp.gmail.com:587'
-          authUsername: 'awais.akram@gmail.com'
-          authIdentity: 'awais.akram@gmail.com'
-          authPassword:
-            name: gmail-auth
-            key: pass
+        - to: 'awais.akram@gmail.com'       # Email recipient
+          from: 'awais.akram@gmail.com'     # Sender email
+          smarthost: 'smtp.gmail.com:587'   # SMTP server for Gmail
+          authUsername: 'awais.akram@gmail.com'  # SMTP auth username
+          authIdentity: 'awais.akram@gmail.com'  # SMTP auth identity (often same as username)
+          authPassword:                     # Reference to a Kubernetes secret for the SMTP password
+            name: gmail-auth                # Name of the secret object
+            key: pass                       # Key within the secret that holds the password
+
 ```
 
 ---
