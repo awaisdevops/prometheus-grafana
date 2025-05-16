@@ -2,7 +2,7 @@
 
 This project implements custom alert rules within a Kubernetes cluster to provide proactive notifications for critical events. The following alert rules are defined:
 
-![Alert Rules Diagram](image.png)
+![Alert Rules Diagram](image)
 
 1. **High CPU Usage**: An alert will be triggered if the CPU utilization on any Kubernetes node surpasses 50%. This helps identify potential performance bottlenecks.  
 2. **Pod Startup Failure**: The system will alert if a pod is unable to start and enters a 'crash loop' state, indicating potential issues with the pod's configuration or dependencies.
