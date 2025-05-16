@@ -32,41 +32,42 @@ The Prometheus Operator simplifies alert rule management in Kubernetes by enabli
 ## `alert-rules.yaml` Configuration
 
 ```yaml
-apiVersion: monitoring.coreos.com/v1
-kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1  # API version for PrometheusRule custom resource
+kind: PrometheusRule                  # Defines a Prometheus alert rule set
 metadata:
-  name: main-rules
-  namespace: monitoring
+  name: main-rules                    # Name of the PrometheusRule resource
+  namespace: monitoring               # Namespace where the rule is deployed
   labels:
-    app: kube-prometheus-stack
-    release: monitoring
-spec: 
-  groups:
-  - name: main.rules
-    rules:
-    - alert: HostHighCPULoad
-      expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 50
-      # This rule triggers an alert if any node in the Kubernetes cluster has 
-      # more than 50% CPU usage on average over the past 2 minutes.
-      for: 2m
-      labels:
-        severity: warning
-        namespace: monitoring
-      annotations:
-        summary: "CPU load on the host is over 50%\n Value = {{ $value }}"
-        description: "The CPU load on node {{ $labels.instance }} has been above 50% for more than 2 minutes."
-        runbook_url: "http://your.runbook.url" 
-        grafana_dashboard_url: "http://your.grafana.dashboard.url"
+    app: kube-prometheus-stack        # Label to associate with Prometheus stack
+    release: monitoring               # Label to identify release grouping
 
-    - alert: KubernetesPodCrashLooping
-      expr: kube_pod_container_status_restarts_total > 5
-      for: 0m
+spec:
+  groups:
+  - name: main.rules                  # Group name for organizing rules
+    rules:
+    - alert: HostHighCPULoad          # First alert rule: high CPU usage on nodes
+      expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 50
+      # Expression: calculates average CPU usage per node over 2 minutes. Triggers if usage > 50%
+      for: 2m                          # Alert fires only if condition is sustained for 2 minutes
       labels:
-        severity: critical
+        severity: warning             # Label used for alert severity
+        namespace: monitoring         # Label indicating monitoring namespace
+      annotations:
+        summary: "CPU load on the host is over 50%\n Value = {{ $value }}"  # Short summary
+        description: "The CPU load on node {{ $labels.instance }} has been above 50% for more than 2 minutes."  # Detailed description
+        runbook_url: "http://your.runbook.url"                             # URL to runbook for resolving alert
+        grafana_dashboard_url: "http://your.grafana.dashboard.url"        # URL to relevant Grafana dashboard
+
+    - alert: KubernetesPodCrashLooping  # Second alert rule: crash looping pods
+      expr: kube_pod_container_status_restarts_total > 5
+      # Expression: triggers if container restart count exceeds 5
+      for: 0m                            # Fires immediately once condition is met
+      labels:
+        severity: critical              # More severe label for crash loops
         namespace: monitoring
       annotations:
-        description: "Pod {{ $labels.pod }} is crash looping\n Value = {{ $value }}"
-        summary: "Kubernetes pod is crash looping"
+        description: "Pod {{ $labels.pod }} is crash looping\n Value = {{ $value }}"  # Detailed info with pod name
+        summary: "Kubernetes pod is crash looping"                                     # Short summary
 ````
 
 ---
