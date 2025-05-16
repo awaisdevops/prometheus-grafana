@@ -1,0 +1,5 @@
+serviceMonitor:
+  enabled: true
+  labels:
+    release: monitoring   # Ensure this matches the Prometheus setup
+redisAddress: redis://redis-cart:6379  # Check that redis-cart is the correct service name for your Redis instance
