@@ -114,14 +114,15 @@ spec:
 > Creating a secret for your Gmail password. **Do not check it into your repo.**
 
 ```yaml
-apiVersion: v1
-kind: Secret
+apiVersion: v1                             # Kubernetes API version for standard resources
+kind: Secret                               # Resource type is a Secret
 metadata:
-  name: gmail-auth
-  namespace: monitoring
-type: Opaque
+  name: gmail-auth                         # Name of the secret object
+  namespace: monitoring                    # Namespace where the secret will be created
+type: Opaque                               # Indicates this is a generic secret (base64-encoded data)
 data:
-  pass: your-password-base64-encoded-value # Replace with your base64-encoded password
+  pass: your-password-base64-encoded-value # Replace with your actual base64-encoded Gmail app password
+
 ```
 
 ```bash
