@@ -73,8 +73,6 @@ ip-192-168-86-219.eu-central-1.compute.internal   Ready    <none>   5m43s   v1.2
 Create a configuration file 'config-microservices.yaml'
 
 ```bash
-
-```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
