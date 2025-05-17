@@ -707,7 +707,8 @@ kubectl apply -f config-microservices.yaml
 # service/frontend created
 # deployment.apps/rediscart created
 # service/rediscart created
-
+```
+```bash
 kubectl get pods
 
 # NAME                                     READY   STATUS    RESTARTS   AGE
@@ -732,7 +733,8 @@ kubectl get pods
 # rediscart-f5cdf4c67-q9sdk                1/1     Running   0          61s
 # shippingservice-59c76d497c-687kv         1/1     Running   0          62s
 # shippingservice-59c76d497c-n9cr4         1/1     Running   0          62s
-
+```
+```bash
 kubectl get services
 
 # NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP                                                                 PORT(S)        AGE
