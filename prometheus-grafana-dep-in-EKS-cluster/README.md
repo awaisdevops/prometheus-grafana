@@ -905,18 +905,24 @@ DaemonSets ensure that a copy of a pod runs on all (or some) nodes.
 
 ```bash
 kubectl get configmap -n monitoring
+
+#Holds configuration files for Prometheus, Alertmanager, etc.
 ```
 
 ### Secrets
 
 ```bash
 kubectl get secret -n monitoring
+
+#Stores sensitive data such as Grafana admin credentials.
 ```
 
 ### CRDs
 
 ```bash
 kubectl get crds
+
+#Manages Prometheus resources like `ServiceMonitor`, `PrometheusRule`, etc.
 ```
 
 ---
@@ -994,7 +1000,7 @@ kubectl get secret prometheus-monitoring-kube-prometheus-prometheus -n monitorin
 
 ```
 MIT License
-
+```
 ---
 
 ## Summary
