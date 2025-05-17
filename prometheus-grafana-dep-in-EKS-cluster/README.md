@@ -1076,5 +1076,3 @@ The Prometheus stack provides:
 ## License
 
 MIT License
-
-

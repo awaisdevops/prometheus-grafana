@@ -1,0 +1,68 @@
+Name:                   monitoring-kube-prometheus-operator
+Namespace:              monitoring
+CreationTimestamp:      Wed, 06 Sep 2023 22:31:35 +0200
+Labels:                 app=kube-prometheus-stack-operator
+                        app.kubernetes.io/instance=monitoring
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/part-of=kube-prometheus-stack
+                        app.kubernetes.io/version=50.3.1
+                        chart=kube-prometheus-stack-50.3.1
+                        heritage=Helm
+                        release=monitoring
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: monitoring
+                        meta.helm.sh/release-namespace: monitoring
+Selector:               app=kube-prometheus-stack-operator,release=monitoring
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app=kube-prometheus-stack-operator
+                    app.kubernetes.io/instance=monitoring
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/part-of=kube-prometheus-stack
+                    app.kubernetes.io/version=50.3.1
+                    chart=kube-prometheus-stack-50.3.1
+                    heritage=Helm
+                    release=monitoring
+  Service Account:  monitoring-kube-prometheus-operator
+  Containers:
+   kube-prometheus-stack:
+    Image:      quay.io/prometheus-operator/prometheus-operator:v0.67.1
+    Port:       10250/TCP
+    Host Port:  0/TCP
+    Args:
+      --kubelet-service=kube-system/monitoring-kube-prometheus-kubelet
+      --localhost=127.0.0.1
+      --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.67.1
+      --config-reloader-cpu-request=200m
+      --config-reloader-cpu-limit=200m
+      --config-reloader-memory-request=50Mi
+      --config-reloader-memory-limit=50Mi
+      --thanos-default-base-image=quay.io/thanos/thanos:v0.32.1
+      --secret-field-selector=type!=kubernetes.io/dockercfg,type!=kubernetes.io/service-account-token,type!=helm.sh/release.v1
+      --web.enable-tls=true
+      --web.cert-file=/cert/cert
+      --web.key-file=/cert/key
+      --web.listen-address=:10250
+      --web.tls-min-version=VersionTLS13
+    Environment:  <none>
+    Mounts:
+      /cert from tls-secret (ro)
+  Volumes:
+   tls-secret:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  monitoring-kube-prometheus-admission
+    Optional:    false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   monitoring-kube-prometheus-operator-7cc5877b9d (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  35m   deployment-controller  Scaled up replica set monitoring-kube-prometheus-operator-7cc5877b9d to 1
