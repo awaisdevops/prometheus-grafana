@@ -858,9 +858,9 @@ kubectl --namespace monitoring get pods -l "release=monitoring"
 
 ---
 
-## Prometheus Stack Components Overview
+### Prometheus Stack Components Overview
 
-### StatefulSets
+## StatefulSets
 
 These are used for managing stateful applications, such as Prometheus and Alertmanager.
 
@@ -870,7 +870,7 @@ These are used for managing stateful applications, such as Prometheus and Alertm
 - **alertmanager-prometheus-kube-prometheus-alertmanager**  
   Manages alerts within the cluster.
 
-### Deployments
+## Deployments
 
 Deployments manage stateless applications and are responsible for ensuring the desired number of pod replicas are running.
 
@@ -883,14 +883,14 @@ Deployments manage stateless applications and are responsible for ensuring the d
 - **prometheus-kube-state-metrics**  
   Collects metrics about the state of Kubernetes objects.
 
-### ReplicaSets
+## ReplicaSets
 
 ReplicaSets are automatically created by Deployments to maintain the desired number of pod replicas.
 
 - Example:  
   Created for deployments like Grafana and kube-state-metrics.
 
-### DaemonSet
+## DaemonSet
 
 DaemonSets ensure that a copy of a pod runs on all (or some) nodes.
 
@@ -900,7 +900,7 @@ DaemonSets ensure that a copy of a pod runs on all (or some) nodes.
 
 ## Configuration Resources
 
-### ConfigMaps
+## ConfigMaps
 
 ```bash
 kubectl get configmap -n monitoring
@@ -908,7 +908,7 @@ kubectl get configmap -n monitoring
 #Holds configuration files for Prometheus, Alertmanager, etc.
 ```
 
-### Secrets
+## Secrets
 
 ```bash
 kubectl get secret -n monitoring
@@ -916,7 +916,7 @@ kubectl get secret -n monitoring
 #Stores sensitive data such as Grafana admin credentials.
 ```
 
-### CRDs
+## CRDs
 
 ```bash
 kubectl get crds
@@ -941,7 +941,7 @@ kubectl get statefulset -n monitoring
 *alertmanager-monitoring-kube-prometheus-alertmanager
 ````
 
-### Inspect StatefulSets
+## Inspect StatefulSets
 
 To get detailed information about each StatefulSet, you can use the `describe` command:
 
@@ -1035,19 +1035,19 @@ http://localhost:3000
 
 ---
 
-## Optional: Explore Internals
-
-### Grafana Deployment
+### Inspect Grafana Deployment
 
 ```bash
 kubectl get deployment -n monitoring
 kubectl describe deployment monitoring-grafana -n monitoring > monitoring-grafana.yaml
+#describe the Grafana deployment in more detail
 ```
 
 ### Operator Deployment
 
 ```bash
 kubectl describe deployment monitoring-kube-prometheus-operator -n monitoring > operator-deployment.yaml
+#describe the operator deployment in more detail
 ```
 
 ### Prometheus Secrets
