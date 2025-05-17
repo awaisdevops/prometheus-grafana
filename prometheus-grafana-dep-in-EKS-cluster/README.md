@@ -70,12 +70,9 @@ ip-192-168-86-219.eu-central-1.compute.internal   Ready    <none>   5m43s   v1.2
 
 ## Deploy Microservices Application
 
-Create a configuration file:
-
-vim config-microservices.yaml
+Create a configuration file 'config-microservices.yaml'
 
 ```bash
-Paste the following:
 
 ```yaml
 apiVersion: apps/v1
