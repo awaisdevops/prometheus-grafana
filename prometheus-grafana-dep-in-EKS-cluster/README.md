@@ -858,15 +858,17 @@ kubectl --namespace monitoring get pods -l "release=monitoring"
 
 ---
 
-## Prometheus Stack Components
+## Prometheus Stack Components Overview
 
 ### StatefulSets
 
-* prometheus-prometheus-kube-prometheus-prometheus
-  #Core Prometheus server managed by the operator
+These are used for managing stateful applications, such as Prometheus and Alertmanager.
 
-* alertmanager-prometheus-kube-prometheus-alertmanager
-  #Manages alerts
+- **prometheus-prometheus-kube-prometheus-prometheus**  
+  Core Prometheus server managed by the operator.
+
+- **alertmanager-prometheus-kube-prometheus-alertmanager**  
+  Manages alerts within the cluster.
 
 ### Deployments
 
