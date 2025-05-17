@@ -1,0 +1,15 @@
+{
+  "name": "bootcamp-node-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "NJ",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.17.1",
+    "prom-client": "14.2.0"
+  }
+}
