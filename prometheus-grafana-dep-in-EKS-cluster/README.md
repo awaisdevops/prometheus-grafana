@@ -872,25 +872,31 @@ These are used for managing stateful applications, such as Prometheus and Alertm
 
 ### Deployments
 
-* prometheus-grafana
-  #Grafana visualization tool
+Deployments manage stateless applications and are responsible for ensuring the desired number of pod replicas are running.
 
-* prometheus-kube-prometheus-operator
-  #Manages the stack
+- **prometheus-grafana**  
+  Grafana visualization tool.
 
-* prometheus-kube-state-metrics
-  #Collects Kubernetes state metrics
+- **prometheus-kube-prometheus-operator**  
+  Manages the Prometheus stack including CRDs and configurations.
+
+- **prometheus-kube-state-metrics**  
+  Collects metrics about the state of Kubernetes objects.
 
 ### ReplicaSets
 
-* Automatically created by Deployments
-  #e.g. Grafana, kube-state-metrics 
+ReplicaSets are automatically created by Deployments to maintain the desired number of pod replicas.
+
+- Example:  
+  Created for deployments like Grafana and kube-state-metrics.
 
 ### DaemonSet
 
-* prometheus-prometheus-node-exporter
-  #Collects node-level metrics like CPU, memory, and disk
+DaemonSets ensure that a copy of a pod runs on all (or some) nodes.
 
+- **prometheus-prometheus-node-exporter**  
+  Collects node-level metrics such as CPU, memory, and disk usage.
+  
 ---
 
 ## Configuration Resources
@@ -988,7 +994,6 @@ kubectl get secret prometheus-monitoring-kube-prometheus-prometheus -n monitorin
 
 ```
 MIT License
-```
 
 ---
 
@@ -1003,67 +1008,3 @@ The Prometheus stack provides:
 * Automated setup and management using the Prometheus Operator
 
 ```
-
-
-
-
-
-
-
-# Prometheus Stack Kubernetes Components Overview
-
-This document provides an overview of the key components deployed when using the Prometheus Stack in a Kubernetes cluster.
-
----
-
-## StatefulSets
-
-These are used for managing stateful applications, such as Prometheus and Alertmanager.
-
-- **prometheus-prometheus-kube-prometheus-prometheus**  
-  Core Prometheus server managed by the operator.
-
-- **alertmanager-prometheus-kube-prometheus-alertmanager**  
-  Manages alerts within the cluster.
-
----
-
-## Deployments
-
-Deployments manage stateless applications and are responsible for ensuring the desired number of pod replicas are running.
-
-- **prometheus-grafana**  
-  Grafana visualization tool.
-
-- **prometheus-kube-prometheus-operator**  
-  Manages the Prometheus stack including CRDs and configurations.
-
-- **prometheus-kube-state-metrics**  
-  Collects metrics about the state of Kubernetes objects.
-
----
-
-## ReplicaSets
-
-ReplicaSets are automatically created by Deployments to maintain the desired number of pod replicas.
-
-- Example:  
-  Created for deployments like Grafana and kube-state-metrics.
-
----
-
-## DaemonSet
-
-DaemonSets ensure that a copy of a pod runs on all (or some) nodes.
-
-- **prometheus-prometheus-node-exporter**  
-  Collects node-level metrics such as CPU, memory, and disk usage.
-
----
-
-## Summary
-
-These components work together to provide a comprehensive monitoring solution in a Kubernetes environment using Prometheus and Grafana.
-```
-
-Let me know if you'd like this saved to a `.md` file or integrated into a larger README document.
