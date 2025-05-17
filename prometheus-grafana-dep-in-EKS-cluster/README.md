@@ -2,7 +2,7 @@
 
 Prometheus is a monitoring system that collects and stores metrics, supports alerting, and integrates with Grafana for advanced visualization.
 
-!(1.png)
+![Prometheus and Grafana Setup](1.png)
 
 ---
 
