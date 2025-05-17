@@ -72,10 +72,9 @@ ip-192-168-86-219.eu-central-1.compute.internal   Ready    <none>   5m43s   v1.2
 
 Create a configuration file:
 
-```bash
 vim config-microservices.yaml
-```
 
+```bash
 Paste the following:
 
 ```yaml
