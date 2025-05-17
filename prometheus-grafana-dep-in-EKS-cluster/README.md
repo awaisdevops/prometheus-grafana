@@ -60,10 +60,7 @@ eksctl create cluster
 
 # After creation (approx. 10-15 mins), check nodes
 kubectl get nodes
-````
 
-
-```
 NAME                                             STATUS   ROLES    AGE     VERSION
 ip-192-168-25-138.eu-central-1.compute.internal   Ready    <none>   5m45s   v1.25.12-eks-8ccc7ba
 ip-192-168-86-219.eu-central-1.compute.internal   Ready    <none>   5m43s   v1.25.12-eks-8ccc7ba
