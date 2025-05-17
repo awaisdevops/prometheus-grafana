@@ -1059,13 +1059,6 @@ kubectl get secret prometheus-monitoring-kube-prometheus-prometheus -n monitorin
 
 ---
 
-## License
-
-```
-MIT License
-```
----
-
 ## Summary
 
 The Prometheus stack provides:
@@ -1076,4 +1069,11 @@ The Prometheus stack provides:
 * Visualization with Grafana
 * Automated setup and management using the Prometheus Operator
 
+---
+
+## License
+
 ```
+MIT License
+
+
