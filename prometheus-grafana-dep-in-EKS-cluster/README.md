@@ -680,7 +680,7 @@ spec:
     targetPort: 6379    
 ```
 
-Apply the configuration:
+Apply the configuration
 
 ```bash
 kubectl apply -f config-microservices.yaml
@@ -862,18 +862,32 @@ kubectl --namespace monitoring get pods -l "release=monitoring"
 
 ### StatefulSets
 
-* prometheus-monitoring-kube-prometheus-prometheus
-* alertmanager-monitoring-kube-prometheus-alertmanager
+* prometheus-prometheus-kube-prometheus-prometheus
+  #Core Prometheus server managed by the operator
+
+* alertmanager-prometheus-kube-prometheus-alertmanager
+  #Manages alerts
 
 ### Deployments
 
-* monitoring-grafana
-* monitoring-kube-prometheus-operator
-* monitoring-kube-state-metrics
+* prometheus-grafana
+  #Grafana visualization tool
+
+* prometheus-kube-prometheus-operator
+  #Manages the stack
+
+* prometheus-kube-state-metrics
+  #Collects Kubernetes state metrics
+
+### ReplicaSets
+
+* Automatically created by Deployments
+  #e.g. Grafana, kube-state-metrics 
 
 ### DaemonSet
 
-* monitoring-prometheus-node-exporter
+* prometheus-prometheus-node-exporter
+  #Collects node-level metrics like CPU, memory, and disk
 
 ---
 
