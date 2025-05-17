@@ -1,4 +1,4 @@
-## Monitor Third Party Application:
+## Monitor Third Party Application
 
 Kubernetes monitoring covers cluster components and Prometheus stack apps, but to monitor third-party apps like Redis at the application level (e.g., load, connections), we use a Prometheus exporter.
 
@@ -6,7 +6,7 @@ The exporter collects Redis metrics and exposes them at a `/metrics` endpoint. T
 
 ---
 
-## Deploy Redis Exporter:
+## Deploy Redis Exporter
 
 We'll deploy a Redis exporter in Kubernetes using a Helm chart, allowing Prometheus to collect Redis application metrics (e.g. memory usage, connection count).
 
@@ -66,7 +66,7 @@ kubectl get servicemonitor
 
 ---
 
-## Alerting and Grafana Dashboard for Redis:
+## Alerting and Grafana Dashboard for Redis
 
 This section explains how to create Prometheus alert rules for a Redis application. It focuses on two key scenarios: when the Redis application is down (not accessible) and when it has an excessive number of connections.
 
@@ -76,7 +76,7 @@ The example rules use metrics like `redis_up` to detect downtime (value of 0 is 
 
 After applying this PrometheusRule using `kubectl apply -f redis-rules.yaml`, these new Redis-specific alert rules should become active in the Prometheus UI alongside existing alerts.
 
-### Two key alerts are configured:
+### Two key alerts are configured
 
 1. **Redis Down** – triggers when the Redis instance is unavailable.
 2. **Too Many Connections** – triggers if Redis has over 100 connections, suggesting it's overloaded.
@@ -115,7 +115,7 @@ spec:
         description: "Redis is running out of connections (> 90% used)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
-### Commands:
+### Commands
 
 ```bash
 kubectl apply -f redis-rules.yaml
@@ -127,13 +127,13 @@ kubectl get prometheusrule
 
 ---
 
-## Trigger "Redis Down":
+## Trigger "Redis Down"
 
 We'll trigger the "Redis down" alert. By scaling the Redis cart deployment down to zero replicas, the Redis pod is removed. After the Prometheus scrape interval (30s), the Redis exporter reports that the Redis application is unavailable (`redis_up == 0`), causing the alert to fire.
 
 If Alertmanager is configured, a notification is sent. Scaling the deployment back up will resolve the alert.
 
-### Commands:
+### Commands
 
 ```bash
 kubectl get pod
@@ -148,7 +148,7 @@ kubectl get pod
 
 ---
 
-## Create Redis Dashboard in Grafana:
+## Create Redis Dashboard in Grafana
 
 Visualize alert data in Grafana for better analysis. Instead of creating a dashboard from scratch, use pre-configured dashboards from Grafana Labs.
 
@@ -156,7 +156,7 @@ Search for "Prometheus Redis Exporter Grafana dashboard" and ensure it matches t
 
 ---
 
-## Import Grafana Dashboard:
+## Import Grafana Dashboard
 
 Importing existing Grafana dashboards is simple:
 
@@ -166,7 +166,7 @@ Importing existing Grafana dashboards is simple:
 
 Grafana will connect to the Redis exporter and display visualizations of relevant metrics like uptime, connected clients, etc.
 
-### Commands:
+### Commands
 
 ```bash
 kubectl get service
