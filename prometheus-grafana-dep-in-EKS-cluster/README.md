@@ -1008,9 +1008,6 @@ The Prometheus stack provides:
 
 
 
-Here's your content properly formatted as a `README.md` file using clean Markdown syntax:
-
-```markdown
 # Prometheus Stack Kubernetes Components Overview
 
 This document provides an overview of the key components deployed when using the Prometheus Stack in a Kubernetes cluster.
