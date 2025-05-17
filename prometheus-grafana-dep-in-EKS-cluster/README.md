@@ -897,7 +897,6 @@ DaemonSets ensure that a copy of a pod runs on all (or some) nodes.
 - **prometheus-prometheus-node-exporter**  
   Collects node-level metrics such as CPU, memory, and disk usage.
   
----
 
 ## Configuration Resources
 
