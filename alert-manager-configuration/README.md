@@ -1,7 +1,7 @@
 # AlertManager Configuration
 
 # Topic of the Demo Project
-### Configure Alerting for our Application
+# Configure Alerting for our Application
 
 When an alert rule in Prometheus goes into a "firing" state, it means Prometheus has detected that the defined condition (like high CPU load) has been met. Prometheus then sends this alert to Alertmanager. However, just because an alert is firing in Prometheus doesn't automatically mean you'll get a notification. Alertmanager is the component responsible for actually routing and sending out notifications (like emails). In the scenario described, Prometheus fired an alert, but since Alertmanager wasn't configured, the alert was essentially ignored, and no notification was sent. We'll configure Alertmanager to handle these firing alerts and send out email notifications.
 
