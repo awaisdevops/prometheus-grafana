@@ -573,13 +573,13 @@ kubectl delete pod cpustress
 
 ---
 
-## Allowing Applications to Send Emails via Email Providers
+### Allowing Applications to Send Emails via Email Providers
 
-### 1. Two-Step Authentication (Recommended)
+#### 1. Two-Step Authentication (Recommended)
 
 Enable 2-Step Authentication on your email account and generate an **App Password**.
 
-### 2. Less Secure Apps (Alternative)
+#### 2. Less Secure Apps (Alternative)
 
 Enable the "Allow less secure apps" setting (deprecated in many Gmail accounts).
 Link: [https://myaccount.google.com/lesssecureapps](https://myaccount.google.com/lesssecureapps)
@@ -588,9 +588,9 @@ Link: [https://myaccount.google.com/lesssecureapps](https://myaccount.google.com
 
 
 
-## Key Fixes Needed
+### Key Fixes Needed
 
-### 1. Enable 2-Step Verification & Use App Password
+#### 1. Enable 2-Step Verification & Use App Password
 
 ```bash
 kubectl create secret generic gmail-auth -n monitoring \
@@ -599,7 +599,7 @@ kubectl create secret generic gmail-auth -n monitoring \
 
 ---
 
-### 2. Verify SMTP Configuration
+#### 2. Verify SMTP Configuration
 
 Ensure the following:
 
@@ -612,7 +612,7 @@ emailConfigs:
 
 ---
 
-### 3. Check Secret Deployment
+#### 3. Check Secret Deployment
 
 ```bash
 kubectl get secret gmail-auth -n monitoring -o yaml
@@ -620,7 +620,7 @@ kubectl get secret gmail-auth -n monitoring -o yaml
 
 ---
 
-### 4. Troubleshooting Steps
+#### 4. Troubleshooting Steps
 
 Test SMTP credentials independently using `swaks`:
 
@@ -634,7 +634,7 @@ swaks --to awais.akram11199@gmail.com --from awais.akram11199@gmail.com \
 
 ---
 
-## Test Email Notifications
+#### Test Email Notifications
 
 When a high CPU alert fires, Alertmanager receives it and routes it to the configured email based on its `alertname` and `namespace` labels. The resulting email notification confirms the setup. Similarly, a pod crash-looping alert also triggers and gets routed to email, demonstrating the label-based routing in action for proactive cluster monitoring.
 
