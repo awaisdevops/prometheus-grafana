@@ -146,8 +146,6 @@ Open the Prometheus UI in the browser and select Status > Targets. You should se
 
 ---
 
-
-```sh
 ## Alerting and Grafana Dashboard for Redis
 
 This section explains how to create Prometheus alert rules for a Redis application. It focuses on two key scenarios: when the Redis application is down (not accessible) and when it has an excessive number of connections. The process involves creating a PrometheusRule YAML file (redis-rules.yaml) defining these alerts within the default namespace where Redis is running. Instead of manually writing the rules, it references the "Awesome Prometheus Alerts" documentation, which provides pre-written alert rules for various services, including Redis. The example rules use metrics like redis_up to detect downtime (value of 0 is critical) and redis_connected_clients to identify too many connections (threshold of 100 is used as an example). After applying this PrometheusRule using kubectl apply -f redis-rules.yaml, these new Redis-specific alert rules should become active in the Prometheus UI alongside existing alerts.
@@ -159,7 +157,9 @@ We will define two key alerts:
 
 Reference: [Awesome Prometheus Alerts](https://awesome-prometheus-alerts.grep.to/)
 
+```sh
 Create the alert rule YAML file: `redis-rules.yaml`
+
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
