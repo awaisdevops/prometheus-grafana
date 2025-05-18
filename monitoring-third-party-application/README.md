@@ -1,6 +1,6 @@
 # Monitor Third Party Application
 
-## Topics of the Demo Project
+### Topics of the Demo Project
 
 #### Configure Monitoring for a Third-Party Application
 
