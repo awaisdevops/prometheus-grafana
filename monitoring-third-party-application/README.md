@@ -204,7 +204,7 @@ verifying rule created. 'redis-rules' created
 
 ## Trigger "Redis Down"
 
-Simulate the Redis Down alert:
+We'll trigger the "Redis down" alert. By scaling the Redis cart deployment down to zero replicas, the Redis pod is removed. After the Prometheus scrape interval (currently 30 seconds), the Redis exporter reports that the Redis application is unavailable (redis_up equals zero), causing the "Redis down" alert to fire in Prometheus. If Alertmanager is configured, a notification would be sent to the specified receiver. Finally, the Redis deployment is scaled back up to restore the Redis pod and resolve the alert, which should return to a green (non-firing) state after the next Prometheus scrape.
 
 1. Identify the Redis pod:
 
@@ -217,6 +217,7 @@ kubectl get pod
 
 ```sh
 kubectl edit deployment redis-cart
+# edit redis deployment "redis-cart"
 # set replicas to 0
 ```
 
@@ -232,7 +233,7 @@ Prometheus should detect `redis_up == 0` and fire the alert.
 
 ## Create Redis Dashboard in Grafana
 
-To better analyze the alerts, we’ll use a pre-configured Redis dashboard from Grafana Labs.
+We'll manage visualizing alert data in Grafana for better analysis. Instead of creating a Redis dashboard from scratch, it recommends using pre-configured dashboards available on Grafana Labs. The process involves searching for relevant dashboards (e.g., "Prometheus Redis Exporter Grafana dashboard") and ensuring they utilize the same metrics as the Redis exporter being used in the cluster. The example highlights a suitable dashboard that provides panels for key Redis metrics like memory usage and connected clients, aiding in understanding the context of triggered alerts.
 
 ### Steps to Import Redis Dashboard in Grafana
 
@@ -255,17 +256,37 @@ Verify data source matches the correct Redis exporter instance:
 
 ```sh
 kubectl get services
-# redis-exporter-prometheus-redis-exporter   ClusterIP   10.100.233.156   <none>   9121/TCP   13h
+# NAME                                       TYPE           CLUSTER-IP       EXTERNAL-IP                                                                 PORT(S)        AGE
+# adservice                                  ClusterIP      10.100.22.140    <none>                                                                      9555/TCP       10d
+# ...
+# redis-exporter-prometheus-redis-exporter   ClusterIP      10.100.233.156   <none>                                                                      9121/TCP       13h
+# rediscart                                  ClusterIP      10.100.206.38    <none>                                                                      6379/TCP       10d
+# shippingservice                            ClusterIP      10.100.95.95     <none>                                                                      50051/TCP      10d
+
+kubectl describe service redis-exporter-prometheus-redis-exporter
+# Name:              redis-exporter-prometheus-redis-exporter
+# Namespace:         default
+# Labels:            app.kubernetes.io/instance=redis-exporter
+#                    app.kubernetes.io/managed-by=Helm
+#                    app.kubernetes.io/name=prometheus-redis-exporter
+#                    app.kubernetes.io/version=v1.54.0
+#                    helm.sh/chart=prometheus-redis-exporter-5.6.0
+# Annotations:       meta.helm.sh/release-name: redis-exporter
+#                    meta.helm.sh/release-namespace: default
+# Selector:          app.kubernetes.io/instance=redis-exporter,app.kubernetes.io/name=prometheus-redis-exporter
+# Type:              ClusterIP
+# IP Family Policy:  SingleStack
+# IP Families:       IPv4
+# IP:                10.100.233.156
+# IPs:               10.100.233.156
+# Port:              redis-exporter  9121/TCP
+# TargetPort:        exporter-port/TCP
+# Endpoints:         192.168.1.149:9121           <---------------
+# Session Affinity:  None
+# Events:            <none>
 
 kubectl describe service redis-exporter-prometheus-redis-exporter
 # Endpoints: 192.168.1.149:9121
 ```
 
 ---
-
-**End of README**
-
-```
-
-Let me know if you'd like this as a downloadable file or want additional formatting for GitHub styling.
-```
