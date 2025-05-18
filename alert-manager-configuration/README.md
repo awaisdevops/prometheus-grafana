@@ -640,6 +640,6 @@ When a high CPU alert fires, Alertmanager receives it and routes it to the confi
 
 ---
 
-## License
+### License
 
 MIT License
