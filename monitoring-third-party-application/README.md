@@ -252,7 +252,7 @@ We'll manage visualizing alert data in Grafana for better analysis. Instead of c
    * Select Prometheus as the data source
    * Click Import
 
-Verify data source matches the correct Redis exporter instance:
+### Verify data source matches the correct Redis exporter instance:
 
 ```sh
 kubectl get services
