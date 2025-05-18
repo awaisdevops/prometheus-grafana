@@ -157,7 +157,6 @@ We will define two key alerts:
 
 Reference: [Awesome Prometheus Alerts](https://awesome-prometheus-alerts.grep.to/)
 
-```sh
 Create the alert rule YAML file: `redis-rules.yaml`
 
 
