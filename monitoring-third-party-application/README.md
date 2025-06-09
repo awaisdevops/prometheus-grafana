@@ -1,4 +1,4 @@
-# Monitor Third Party Application
+# Custom Application Monitoring (Redis) using Prometheus & Grafana on Kubernetes
 
 ### Topics of the Demo Project
 
