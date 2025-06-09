@@ -1,4 +1,4 @@
-# AlertManager Configuration
+# Real-time Alerting System using Kubernetes, Prometheus, and AlertManager
 
 ### Topic of the Demo Project 
 #### Configure Alerting for our Application
